@@ -1,9 +1,9 @@
-import React from 'react';
-import { Screen, NavigationAction } from '../App';
+import { Screen, NavigationAction, UserType } from '../App';
 import { Home, Calendar, Trophy, User, Star, Award, TrendingUp, Gift, QrCode } from 'lucide-react';
+import MemberBottomNav from './MemberBottomNav';
 
 interface MemberHomeProps {
-  onNavigate: (screen: NavigationAction) => void;
+  onNavigate: (screen: NavigationAction, userType?: UserType) => void;
 }
 
 export default function MemberHome({ onNavigate }: MemberHomeProps) {
@@ -91,7 +91,7 @@ export default function MemberHome({ onNavigate }: MemberHomeProps) {
         {/* Quick Stats Grid */}
         <div className="grid grid-cols-2 gap-4 mb-6">
           <button
-            onClick={() => onNavigate('member-attendance')}
+            onClick={() => onNavigate('member-attendance', 'member')}
             className="bg-white rounded-2xl p-4 shadow-md hover:shadow-lg transition-shadow"
           >
             <div className="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mb-3">
@@ -102,7 +102,7 @@ export default function MemberHome({ onNavigate }: MemberHomeProps) {
           </button>
 
           <button
-            onClick={() => onNavigate('member-achievements')}
+            onClick={() => onNavigate('member-achievements', 'member')}
             className="bg-white rounded-2xl p-4 shadow-md hover:shadow-lg transition-shadow"
           >
             <div className="w-12 h-12 bg-yellow-100 rounded-full flex items-center justify-center mb-3">
@@ -113,7 +113,7 @@ export default function MemberHome({ onNavigate }: MemberHomeProps) {
           </button>
 
           <button
-            onClick={() => onNavigate('member-gamification')}
+            onClick={() => onNavigate('member-gamification', 'member')}
             className="bg-white rounded-2xl p-4 shadow-md hover:shadow-lg transition-shadow"
           >
             <div className="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center mb-3">
@@ -186,33 +186,7 @@ export default function MemberHome({ onNavigate }: MemberHomeProps) {
       </div>
 
       {/* Navigation Bar */}
-      <div className="bg-white border-t border-gray-200 px-8 py-4 flex justify-around items-center">
-        <button className="flex flex-col items-center gap-1 text-[#7AC142]">
-          <Home className="w-6 h-6" />
-          <span className="text-xs">Inicio</span>
-        </button>
-        <button
-          onClick={() => onNavigate('member-attendance')}
-          className="flex flex-col items-center gap-1 text-gray-400"
-        >
-          <Calendar className="w-6 h-6" />
-          <span className="text-xs">Asistencias</span>
-        </button>
-        <button
-          onClick={() => onNavigate('member-achievements')}
-          className="flex flex-col items-center gap-1 text-gray-400"
-        >
-          <Trophy className="w-6 h-6" />
-          <span className="text-xs">Logros</span>
-        </button>
-        <button
-          onClick={() => onNavigate('profile')}
-          className="flex flex-col items-center gap-1 text-gray-400"
-        >
-          <User className="w-6 h-6" />
-          <span className="text-xs">Perfil</span>
-        </button>
-      </div>
+      <MemberBottomNav activeScreen="home" onNavigate={onNavigate} />
     </div>
   );
 }
