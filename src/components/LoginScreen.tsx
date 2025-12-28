@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
-import { Screen, UserType } from '../App';
+import { Screen, UserType, NavigationAction } from '../App';
+import { ArrowLeft } from 'lucide-react';
 
 interface LoginScreenProps {
-  onNavigate: (screen: Screen, userType?: UserType) => void;
+  onNavigate: (screen: NavigationAction, userType?: UserType) => void;
 }
 
 export default function LoginScreen({ onNavigate }: LoginScreenProps) {
@@ -38,12 +39,19 @@ export default function LoginScreen({ onNavigate }: LoginScreenProps) {
       </div>
 
       {/* Header Illustration */}
-      <div className="w-full h-64 bg-gradient-to-br from-green-100 to-green-50 flex items-center justify-center overflow-hidden">
+      <div className="w-full h-64 bg-gradient-to-br from-green-100 to-green-50 flex items-center justify-center overflow-hidden relative">
         <img
           src="https://images.unsplash.com/photo-1622597468666-27cb9cae0e45?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxmaXRuZXNzJTIwcGVvcGxlJTIwZ3JlZW4lMjBzbW9vdGhpZXxlbnwxfHx8fDE3NjY2MDczMjN8MA&ixlib=rb-4.1.0&q=80&w=1080"
           alt="Happy person with shake"
           className="w-full h-full object-cover opacity-80"
         />
+        <button
+          onClick={() => onNavigate('BACK')}
+          className="absolute top-4 left-6 p-3 bg-white rounded-full shadow-xl z-50 hover:bg-gray-50 flex items-center justify-center transition-transform active:scale-95"
+          aria-label="Volver"
+        >
+          <ArrowLeft className="w-6 h-6 text-black" />
+        </button>
       </div>
 
       {/* Content */}

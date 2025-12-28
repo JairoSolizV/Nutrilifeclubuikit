@@ -1,9 +1,9 @@
 import React from 'react';
-import { Screen } from '../App';
+import { Screen, NavigationAction } from '../App';
 import { Home, MapPin, User, ChevronRight, Shield, Edit } from 'lucide-react';
 
 interface UserProfileProps {
-  onNavigate: (screen: Screen) => void;
+  onNavigate: (screen: NavigationAction) => void;
 }
 
 export default function UserProfile({ onNavigate }: UserProfileProps) {
@@ -26,7 +26,7 @@ export default function UserProfile({ onNavigate }: UserProfileProps) {
           <div className="w-20 h-20 bg-gradient-to-br from-[#7AC142] to-[#6BB032] rounded-full flex items-center justify-center text-white shadow-lg">
             <span className="text-2xl">CM</span>
           </div>
-          
+
           {/* User Info */}
           <div className="flex-1">
             <h2 className="text-[#333333]">Carlos Méndez</h2>
@@ -39,7 +39,10 @@ export default function UserProfile({ onNavigate }: UserProfileProps) {
       <div className="flex-1 overflow-y-auto px-6 py-6">
         {/* Menu List */}
         <div className="bg-white rounded-2xl shadow-sm overflow-hidden mb-6">
-          <button className="w-full px-5 py-4 flex items-center justify-between border-b border-gray-100 hover:bg-gray-50 transition-colors">
+          <button
+            onClick={() => onNavigate('user-edit-profile')}
+            className="w-full px-5 py-4 flex items-center justify-between border-b border-gray-100 hover:bg-gray-50 transition-colors"
+          >
             <div className="flex items-center gap-3">
               <Edit className="w-5 h-5 text-gray-400" />
               <span className="text-[#333333]">Editar mis datos</span>
@@ -47,7 +50,10 @@ export default function UserProfile({ onNavigate }: UserProfileProps) {
             <ChevronRight className="w-5 h-5 text-gray-400" />
           </button>
 
-          <button className="w-full px-5 py-4 flex items-center justify-between hover:bg-gray-50 transition-colors">
+          <button
+            onClick={() => onNavigate('user-security')}
+            className="w-full px-5 py-4 flex items-center justify-between hover:bg-gray-50 transition-colors"
+          >
             <div className="flex items-center gap-3">
               <Shield className="w-5 h-5 text-gray-400" />
               <span className="text-[#333333]">Seguridad</span>

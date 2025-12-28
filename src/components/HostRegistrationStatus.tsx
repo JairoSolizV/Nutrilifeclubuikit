@@ -1,9 +1,9 @@
 import React from 'react';
-import { Screen } from '../App';
+import { Screen, NavigationAction } from '../App';
 import { Clock, CheckCircle, MapPin, Image as ImageIcon, Mail } from 'lucide-react';
 
 interface HostRegistrationStatusProps {
-  onNavigate: (screen: Screen) => void;
+  onNavigate: (screen: NavigationAction) => void;
 }
 
 export default function HostRegistrationStatus({ onNavigate }: HostRegistrationStatusProps) {
@@ -25,7 +25,7 @@ export default function HostRegistrationStatus({ onNavigate }: HostRegistrationS
         <div className="w-24 h-24 bg-gradient-to-br from-yellow-400 to-orange-500 rounded-full flex items-center justify-center mb-6 shadow-lg">
           <Clock className="w-12 h-12 text-white" />
         </div>
-        
+
         <h2 className="text-[#333333] text-center mb-3">Solicitud en Evaluación</h2>
         <p className="text-gray-600 text-center mb-8 max-w-sm">
           Tu solicitud para el club <span className="text-[#7AC142]">"Club Vida Activa"</span> está siendo revisada por el administrador corporativo.
@@ -34,7 +34,7 @@ export default function HostRegistrationStatus({ onNavigate }: HostRegistrationS
         {/* Request Summary Card */}
         <div className="bg-white rounded-2xl shadow-md p-5 w-full max-w-sm mb-6">
           <h3 className="text-[#333333] mb-4">Resumen de Solicitud</h3>
-          
+
           <div className="space-y-4">
             {/* Club Name */}
             <div>
@@ -135,7 +135,7 @@ export default function HostRegistrationStatus({ onNavigate }: HostRegistrationS
         >
           Contactar Soporte
         </button>
-        
+
         <button
           onClick={() => onNavigate('login')}
           className="w-full max-w-sm border-2 border-gray-300 text-gray-700 py-4 rounded-full"

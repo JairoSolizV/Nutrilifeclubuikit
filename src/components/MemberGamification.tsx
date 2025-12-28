@@ -1,9 +1,9 @@
 import React from 'react';
-import { Screen } from '../App';
+import { Screen, NavigationAction } from '../App';
 import { ArrowLeft, Star, Zap, Gift, Calendar, Trophy, Award, TrendingUp, Ticket } from 'lucide-react';
 
 interface MemberGamificationProps {
-  onNavigate: (screen: Screen) => void;
+  onNavigate: (screen: NavigationAction) => void;
 }
 
 export default function MemberGamification({ onNavigate }: MemberGamificationProps) {
@@ -35,7 +35,7 @@ export default function MemberGamification({ onNavigate }: MemberGamificationPro
 
       {/* Header */}
       <div className="bg-gradient-to-br from-[#7AC142] to-[#6BB032] px-6 py-6 shadow-lg">
-        <button onClick={() => onNavigate('member-home')} className="mb-4">
+        <button onClick={() => onNavigate('BACK')} className="mb-4">
           <ArrowLeft className="w-6 h-6 text-white" />
         </button>
 
@@ -108,7 +108,7 @@ export default function MemberGamification({ onNavigate }: MemberGamificationPro
             <h3 className="text-[#333333]">Cupones Disponibles</h3>
             <Ticket className="w-5 h-5 text-[#7AC142]" />
           </div>
-          
+
           <div className="flex gap-4 overflow-x-auto pb-2">
             {coupons.map((coupon) => (
               <div key={coupon.id} className="bg-white rounded-2xl shadow-md p-4 min-w-[200px] flex-shrink-0">

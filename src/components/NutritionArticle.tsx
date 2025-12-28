@@ -1,29 +1,29 @@
 import React from 'react';
-import { Screen } from '../App';
+import { Screen, NavigationAction } from '../App';
 import { ArrowLeft, Coffee } from 'lucide-react';
 
 interface NutritionArticleProps {
-  onNavigate: (screen: Screen) => void;
+  onNavigate: (screen: NavigationAction) => void;
 }
 
 export default function NutritionArticle({ onNavigate }: NutritionArticleProps) {
   return (
     <div className="min-h-screen bg-white flex flex-col">
       {/* Status Bar */}
-      <div className="absolute top-0 left-0 right-0 z-20 flex justify-between items-center px-6 py-3 text-white">
+      <div className="w-full flex justify-between items-center px-6 py-3 bg-white">
         <span className="text-sm">9:41</span>
         <div className="flex gap-1">
-          <div className="w-4 h-3 bg-white/60 rounded-sm"></div>
-          <div className="w-4 h-3 bg-white/60 rounded-sm"></div>
-          <div className="w-4 h-3 bg-white/60 rounded-sm"></div>
+          <div className="w-4 h-3 bg-gray-400 rounded-sm"></div>
+          <div className="w-4 h-3 bg-gray-400 rounded-sm"></div>
+          <div className="w-4 h-3 bg-gray-400 rounded-sm"></div>
         </div>
       </div>
 
       {/* Header with Back Button */}
       <div className="relative h-16 bg-white border-b border-gray-200 flex items-center px-6">
         <button
-          onClick={() => onNavigate('guest-home')}
-          className="absolute left-6"
+          onClick={() => onNavigate('BACK')}
+          className="absolute left-6 z-30"
         >
           <ArrowLeft className="w-6 h-6 text-[#333333]" />
         </button>
@@ -59,13 +59,13 @@ export default function NutritionArticle({ onNavigate }: NutritionArticleProps) 
           {/* Article Text */}
           <div className="space-y-4 text-gray-600">
             <p>
-              Comenzar el día con un desayuno rico en proteína puede transformar tu salud y bienestar. 
-              La proteína es esencial para mantener la energía estable durante toda la mañana y evitar 
+              Comenzar el día con un desayuno rico en proteína puede transformar tu salud y bienestar.
+              La proteína es esencial para mantener la energía estable durante toda la mañana y evitar
               los picos de hambre.
             </p>
 
             <p>
-              Estudios recientes demuestran que las personas que consumen entre 20-30 gramos de proteína 
+              Estudios recientes demuestran que las personas que consumen entre 20-30 gramos de proteína
               en el desayuno experimentan mejor concentración y rendimiento físico durante el día.
             </p>
 
@@ -102,19 +102,19 @@ export default function NutritionArticle({ onNavigate }: NutritionArticleProps) 
               </div>
               <p className="text-gray-700 mb-3">Batido Verde Energizante</p>
               <p className="text-sm text-gray-600">
-                Mezcla 1 scoop de proteína de vainilla, 1 taza de espinacas, 1/2 plátano, 
+                Mezcla 1 scoop de proteína de vainilla, 1 taza de espinacas, 1/2 plátano,
                 1 taza de leche de almendras y hielo. ¡Listo en 2 minutos!
               </p>
             </div>
 
             <p>
-              Incorporar proteína de calidad en tu desayuno no tiene que ser complicado. Opciones 
-              como batidos proteicos, huevos, yogur griego o avena con proteína son excelentes 
+              Incorporar proteína de calidad en tu desayuno no tiene que ser complicado. Opciones
+              como batidos proteicos, huevos, yogur griego o avena con proteína son excelentes
               alternativas para comenzar el día con energía.
             </p>
 
             <p>
-              Recuerda que la constancia es clave. Implementar este hábito saludable durante al menos 
+              Recuerda que la constancia es clave. Implementar este hábito saludable durante al menos
               21 días te ayudará a notar cambios significativos en tu energía y bienestar general.
             </p>
           </div>

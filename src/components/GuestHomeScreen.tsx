@@ -1,9 +1,10 @@
 import React from 'react';
-import { Screen } from '../App';
-import { Home, Compass, LogIn, MapPin, Apple, Droplet } from 'lucide-react';
+import { Screen, NavigationAction } from '../App';
+import { MapPin, Apple, Droplet } from 'lucide-react';
+import GuestBottomNav from './GuestBottomNav';
 
 interface GuestHomeScreenProps {
-  onNavigate: (screen: Screen) => void;
+  onNavigate: (screen: NavigationAction) => void;
 }
 
 export default function GuestHomeScreen({ onNavigate }: GuestHomeScreenProps) {
@@ -77,38 +78,22 @@ export default function GuestHomeScreen({ onNavigate }: GuestHomeScreenProps) {
           </button>
 
           {/* Rectangular Card */}
-          <div className="col-span-2 bg-gradient-to-r from-[#7AC142] to-[#6BB032] rounded-3xl p-6 shadow-md flex items-center gap-4">
+          <button
+            onClick={() => onNavigate('guest-catalog')}
+            className="col-span-2 bg-gradient-to-r from-[#7AC142] to-[#6BB032] rounded-3xl p-6 shadow-md flex items-center gap-4 hover:shadow-lg transition-shadow text-left"
+          >
             <div className="w-12 h-12 bg-white/20 rounded-full flex items-center justify-center">
               <Droplet className="w-6 h-6 text-white" />
             </div>
             <div className="text-white">
-              <p className="text-sm opacity-90">Catálogo de Sabores</p>
+              <p className="font-semibold text-lg">Catálogo de Sabores</p>
+              <p className="text-sm opacity-90">Descubre nuestra variedad</p>
             </div>
-          </div>
+          </button>
         </div>
       </div>
 
-      {/* Navigation Bar */}
-      <div className="bg-white border-t border-gray-200 px-8 py-4 flex justify-around items-center">
-        <button className="flex flex-col items-center gap-1 text-[#7AC142]">
-          <Home className="w-6 h-6" />
-          <span className="text-xs">Home</span>
-        </button>
-        <button
-          onClick={() => onNavigate('map')}
-          className="flex flex-col items-center gap-1 text-gray-400"
-        >
-          <Compass className="w-6 h-6" />
-          <span className="text-xs">Explorar</span>
-        </button>
-        <button
-          onClick={() => onNavigate('login')}
-          className="flex flex-col items-center gap-1 text-gray-400"
-        >
-          <LogIn className="w-6 h-6" />
-          <span className="text-xs">Ingresar</span>
-        </button>
-      </div>
+      <GuestBottomNav activeScreen="home" onNavigate={onNavigate} />
     </div>
   );
 }

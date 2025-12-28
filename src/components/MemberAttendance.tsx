@@ -1,9 +1,9 @@
 import React from 'react';
-import { Screen } from '../App';
+import { Screen, NavigationAction } from '../App';
 import { ArrowLeft, Calendar, CheckCircle, TrendingUp, Zap } from 'lucide-react';
 
 interface MemberAttendanceProps {
-  onNavigate: (screen: Screen) => void;
+  onNavigate: (screen: NavigationAction) => void;
 }
 
 export default function MemberAttendance({ onNavigate }: MemberAttendanceProps) {
@@ -37,7 +37,7 @@ export default function MemberAttendance({ onNavigate }: MemberAttendanceProps) 
 
       {/* Header */}
       <div className="bg-white px-6 py-4 shadow-sm flex items-center">
-        <button onClick={() => onNavigate('member-home')} className="mr-4">
+        <button onClick={() => onNavigate('BACK')} className="mr-4">
           <ArrowLeft className="w-6 h-6 text-[#333333]" />
         </button>
         <h2 className="text-[#333333]">Mis Asistencias</h2>

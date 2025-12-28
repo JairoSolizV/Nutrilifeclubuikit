@@ -1,9 +1,9 @@
 import React from 'react';
-import { Screen } from '../App';
+import { Screen, NavigationAction } from '../App';
 import { Home, Users, QrCode, Settings, TrendingUp, UserPlus, Calendar, Award } from 'lucide-react';
 
 interface HostDashboardProps {
-  onNavigate: (screen: Screen) => void;
+  onNavigate: (screen: NavigationAction) => void;
 }
 
 export default function HostDashboard({ onNavigate }: HostDashboardProps) {
@@ -63,17 +63,17 @@ export default function HostDashboard({ onNavigate }: HostDashboardProps) {
             <div className="w-48 h-48 bg-white border-4 border-[#7AC142] rounded-2xl flex items-center justify-center mb-4">
               <svg width="180" height="180" viewBox="0 0 180 180">
                 <rect x="0" y="0" width="180" height="180" fill="white" />
-                
+
                 {/* QR Code Pattern - Club QR */}
                 <rect x="10" y="10" width="50" height="50" fill="none" stroke="#7AC142" strokeWidth="6" />
                 <rect x="22" y="22" width="26" height="26" fill="#7AC142" />
-                
+
                 <rect x="120" y="10" width="50" height="50" fill="none" stroke="#7AC142" strokeWidth="6" />
                 <rect x="132" y="22" width="26" height="26" fill="#7AC142" />
-                
+
                 <rect x="10" y="120" width="50" height="50" fill="none" stroke="#7AC142" strokeWidth="6" />
                 <rect x="22" y="132" width="26" height="26" fill="#7AC142" />
-                
+
                 {/* Data dots */}
                 <rect x="70" y="15" width="8" height="8" fill="#7AC142" />
                 <rect x="82" y="15" width="8" height="8" fill="#7AC142" />

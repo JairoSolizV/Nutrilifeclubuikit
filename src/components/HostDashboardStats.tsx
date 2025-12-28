@@ -1,9 +1,9 @@
 import React from 'react';
-import { Screen } from '../App';
+import { Screen, NavigationAction } from '../App';
 import { ArrowLeft, BarChart3, TrendingUp, Users, UserCheck, QrCode, Edit, Calendar } from 'lucide-react';
 
 interface HostDashboardStatsProps {
-  onNavigate: (screen: Screen) => void;
+  onNavigate: (screen: NavigationAction) => void;
 }
 
 export default function HostDashboardStats({ onNavigate }: HostDashboardStatsProps) {
@@ -35,7 +35,7 @@ export default function HostDashboardStats({ onNavigate }: HostDashboardStatsPro
       <div className="bg-white px-6 py-4 shadow-sm">
         <div className="flex items-center justify-between">
           <div className="flex items-center">
-            <button onClick={() => onNavigate('host-dashboard')} className="mr-4">
+            <button onClick={() => onNavigate('BACK')} className="mr-4">
               <ArrowLeft className="w-6 h-6 text-[#333333]" />
             </button>
             <div className="flex items-center gap-2">
@@ -110,7 +110,7 @@ export default function HostDashboardStats({ onNavigate }: HostDashboardStatsPro
         {/* Active vs Inactive Members */}
         <div className="bg-white rounded-2xl shadow-md p-5 mb-6">
           <h3 className="text-[#333333] mb-5">Socios Activos vs Inactivos</h3>
-          
+
           {/* Donut Chart Simulation */}
           <div className="flex items-center justify-center mb-5">
             <div className="relative w-40 h-40">
@@ -165,7 +165,7 @@ export default function HostDashboardStats({ onNavigate }: HostDashboardStatsPro
         {/* Monthly Trends */}
         <div className="bg-white rounded-2xl shadow-md p-5 mb-6">
           <h3 className="text-[#333333] mb-4">Tendencias del Mes</h3>
-          
+
           <div className="space-y-4">
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-3">

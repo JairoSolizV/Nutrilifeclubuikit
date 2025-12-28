@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
-import { Screen } from '../App';
+import { Screen, NavigationAction } from '../App';
 import { ArrowLeft, Star, Wifi, Wind, Navigation } from 'lucide-react';
 
 interface ClubDetailInfoProps {
-  onNavigate: (screen: Screen) => void;
+  onNavigate: (screen: NavigationAction) => void;
 }
 
 export default function ClubDetailInfo({ onNavigate }: ClubDetailInfoProps) {
@@ -39,8 +39,8 @@ export default function ClubDetailInfo({ onNavigate }: ClubDetailInfoProps) {
         />
         <div className="absolute inset-0 bg-gradient-to-b from-black/40 to-transparent"></div>
         <button
-          onClick={() => onNavigate('map')}
-          className="absolute top-14 left-6 p-2 bg-white/90 rounded-full shadow-lg"
+          onClick={() => onNavigate('BACK')}
+          className="absolute top-14 left-6 p-2 bg-white/90 rounded-full shadow-lg z-30"
         >
           <ArrowLeft className="w-6 h-6 text-[#333333]" />
         </button>
@@ -57,7 +57,7 @@ export default function ClubDetailInfo({ onNavigate }: ClubDetailInfoProps) {
             Abierto Ahora
           </div>
         </div>
-        
+
         {/* Rating */}
         <div className="flex items-center gap-1 mt-2">
           {[1, 2, 3, 4, 5].map((star) => (
@@ -70,31 +70,28 @@ export default function ClubDetailInfo({ onNavigate }: ClubDetailInfoProps) {
       <div className="bg-white border-b border-gray-200 flex">
         <button
           onClick={() => handleTabChange('info')}
-          className={`flex-1 py-4 text-center border-b-2 transition-colors ${
-            activeTab === 'info'
-              ? 'border-[#7AC142] text-[#7AC142]'
-              : 'border-transparent text-gray-500'
-          }`}
+          className={`flex-1 py-4 text-center border-b-2 transition-colors ${activeTab === 'info'
+            ? 'border-[#7AC142] text-[#7AC142]'
+            : 'border-transparent text-gray-500'
+            }`}
         >
           Información
         </button>
         <button
           onClick={() => handleTabChange('menu')}
-          className={`flex-1 py-4 text-center border-b-2 transition-colors ${
-            activeTab === 'menu'
-              ? 'border-[#7AC142] text-[#7AC142]'
-              : 'border-transparent text-gray-500'
-          }`}
+          className={`flex-1 py-4 text-center border-b-2 transition-colors ${activeTab === 'menu'
+            ? 'border-[#7AC142] text-[#7AC142]'
+            : 'border-transparent text-gray-500'
+            }`}
         >
           Menú
         </button>
         <button
           onClick={() => handleTabChange('events')}
-          className={`flex-1 py-4 text-center border-b-2 transition-colors ${
-            activeTab === 'events'
-              ? 'border-[#7AC142] text-[#7AC142]'
-              : 'border-transparent text-gray-500'
-          }`}
+          className={`flex-1 py-4 text-center border-b-2 transition-colors ${activeTab === 'events'
+            ? 'border-[#7AC142] text-[#7AC142]'
+            : 'border-transparent text-gray-500'
+            }`}
         >
           Eventos
         </button>
@@ -106,7 +103,7 @@ export default function ClubDetailInfo({ onNavigate }: ClubDetailInfoProps) {
         <div className="bg-gradient-to-br from-green-50 to-blue-50 rounded-2xl h-32 mb-6 relative overflow-hidden">
           <svg width="100%" height="100%" className="opacity-20">
             <pattern id="map-grid" width="30" height="30" patternUnits="userSpaceOnUse">
-              <path d="M 30 0 L 0 0 0 30" fill="none" stroke="#7AC142" strokeWidth="0.5"/>
+              <path d="M 30 0 L 0 0 0 30" fill="none" stroke="#7AC142" strokeWidth="0.5" />
             </pattern>
             <rect width="100%" height="100%" fill="url(#map-grid)" />
           </svg>

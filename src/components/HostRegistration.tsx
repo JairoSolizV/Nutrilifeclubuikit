@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
-import { Screen } from '../App';
+import { Screen, NavigationAction } from '../App';
 import { ArrowLeft, Upload, MapPin, Clock, Image as ImageIcon, CheckCircle } from 'lucide-react';
 
 interface HostRegistrationProps {
-  onNavigate: (screen: Screen) => void;
+  onNavigate: (screen: NavigationAction) => void;
 }
 
 export default function HostRegistration({ onNavigate }: HostRegistrationProps) {
@@ -40,10 +40,10 @@ export default function HostRegistration({ onNavigate }: HostRegistrationProps) 
           <div className="w-24 h-24 bg-yellow-100 rounded-full flex items-center justify-center mb-6">
             <Clock className="w-12 h-12 text-yellow-600" />
           </div>
-          
+
           <h2 className="text-[#333333] text-center mb-3">Solicitud Enviada</h2>
           <p className="text-gray-600 text-center mb-8 max-w-sm">
-            Tu solicitud para registrar el club ha sido enviada correctamente. 
+            Tu solicitud para registrar el club ha sido enviada correctamente.
             El equipo de administración la revisará en las próximas 24-48 horas.
           </p>
 
@@ -105,7 +105,7 @@ export default function HostRegistration({ onNavigate }: HostRegistrationProps) 
 
       {/* Header */}
       <div className="bg-white px-6 py-4 shadow-sm flex items-center">
-        <button onClick={() => onNavigate('login')} className="mr-4">
+        <button onClick={() => onNavigate('BACK')} className="mr-4">
           <ArrowLeft className="w-6 h-6 text-[#333333]" />
         </button>
         <h2 className="text-[#333333]">Registrar Club</h2>
@@ -117,7 +117,7 @@ export default function HostRegistration({ onNavigate }: HostRegistrationProps) 
         <div className="bg-gradient-to-br from-green-50 to-green-100 rounded-2xl p-5 mb-6">
           <h3 className="text-[#333333] mb-2">Bienvenido al programa de Anfitriones</h3>
           <p className="text-sm text-gray-700">
-            Para garantizar la calidad de nuestros clubes, todas las solicitudes son revisadas 
+            Para garantizar la calidad de nuestros clubes, todas las solicitudes son revisadas
             por nuestro equipo antes de ser aprobadas.
           </p>
         </div>

@@ -23,8 +23,11 @@ import HostRegistrationStatus from './components/HostRegistrationStatus';
 import HostRegisterMember from './components/HostRegisterMember';
 import HostDashboardStats from './components/HostDashboardStats';
 import SupportCenter from './components/SupportCenter';
+import GuestFlavorCatalog from './components/GuestFlavorCatalog';
+import UserEditProfile from './components/UserEditProfile';
+import UserSecurity from './components/UserSecurity';
 
-export type Screen = 
+export type Screen =
   | 'splash'
   | 'screen-selector'
   | 'login'
@@ -48,16 +51,30 @@ export type Screen =
   | 'host-registration-status'
   | 'host-register-member'
   | 'host-stats'
-  | 'support-center';
+  | 'support-center'
+  | 'guest-catalog'
+  | 'user-edit-profile'
+  | 'user-security';
 
 export type UserType = 'guest' | 'basic' | 'member' | 'host' | null;
 
+export type NavigationAction = Screen | 'BACK';
+
 function App() {
-  const [currentScreen, setCurrentScreen] = useState<Screen>('splash');
+  const [history, setHistory] = useState<Screen[]>(['splash']);
   const [userType, setUserType] = useState<UserType>(null);
 
-  const navigateTo = (screen: Screen, user?: UserType) => {
-    setCurrentScreen(screen);
+  const currentScreen = history[history.length - 1];
+
+  const navigateTo = (action: NavigationAction, user?: UserType) => {
+    if (action === 'BACK') {
+      if (history.length > 1) {
+        setHistory(prev => prev.slice(0, -1));
+      }
+    } else {
+      setHistory(prev => [...prev, action]);
+    }
+
     if (user !== undefined) {
       setUserType(user);
     }
@@ -73,8 +90,14 @@ function App() {
         return <LoginScreen onNavigate={navigateTo} />;
       case 'guest-home':
         return <GuestHomeScreen onNavigate={navigateTo} />;
+      case 'guest-catalog':
+        return <GuestFlavorCatalog onNavigate={navigateTo} />;
       case 'basic-user-home':
         return <BasicUserHomeScreen onNavigate={navigateTo} />;
+      case 'user-edit-profile':
+        return <UserEditProfile onNavigate={navigateTo} />;
+      case 'user-security':
+        return <UserSecurity onNavigate={navigateTo} />;
       case 'map':
         return <MapScreen onNavigate={navigateTo} userType={userType} />;
       case 'club-info':

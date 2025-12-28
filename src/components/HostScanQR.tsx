@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
-import { Screen } from '../App';
+import { Screen, NavigationAction } from '../App';
 import { ArrowLeft, QrCode, CheckCircle, Camera, Flashlight } from 'lucide-react';
 
 interface HostScanQRProps {
-  onNavigate: (screen: Screen) => void;
+  onNavigate: (screen: NavigationAction) => void;
 }
 
 export default function HostScanQR({ onNavigate }: HostScanQRProps) {
@@ -32,7 +32,7 @@ export default function HostScanQR({ onNavigate }: HostScanQRProps) {
 
       {/* Header */}
       <div className="px-6 py-4 flex items-center justify-between">
-        <button onClick={() => onNavigate('host-dashboard')} className="text-white">
+        <button onClick={() => onNavigate('BACK')} className="text-white">
           <ArrowLeft className="w-6 h-6" />
         </button>
         <h2 className="text-white">Escanear QR</h2>
@@ -92,7 +92,7 @@ export default function HostScanQR({ onNavigate }: HostScanQRProps) {
             </div>
             <h3 className="text-white mb-2">¡Asistencia Registrada!</h3>
             <p className="text-white/80 text-sm mb-6">María González</p>
-            
+
             <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-5 mb-6 max-w-sm mx-auto">
               <div className="grid grid-cols-2 gap-4 text-white">
                 <div>

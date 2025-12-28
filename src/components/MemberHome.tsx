@@ -1,9 +1,9 @@
 import React from 'react';
-import { Screen } from '../App';
+import { Screen, NavigationAction } from '../App';
 import { Home, Calendar, Trophy, User, Star, Award, TrendingUp, Gift, QrCode } from 'lucide-react';
 
 interface MemberHomeProps {
-  onNavigate: (screen: Screen) => void;
+  onNavigate: (screen: NavigationAction) => void;
 }
 
 export default function MemberHome({ onNavigate }: MemberHomeProps) {
@@ -48,7 +48,7 @@ export default function MemberHome({ onNavigate }: MemberHomeProps) {
               <p className="text-xs text-gray-500">Este mes</p>
             </div>
           </div>
-          
+
           {/* Progress Bar */}
           <div className="space-y-2">
             <div className="flex justify-between text-xs text-gray-600">
