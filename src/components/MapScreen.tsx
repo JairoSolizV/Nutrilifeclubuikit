@@ -2,6 +2,8 @@ import React from 'react';
 import { Screen, UserType, NavigationAction } from '../App';
 import { ArrowLeft, Search, SlidersHorizontal, MapPin, Clock, Navigation } from 'lucide-react';
 import GuestBottomNav from './GuestBottomNav';
+import BasicUserBottomNav from './BasicUserBottomNav';
+import MemberBottomNav from './MemberBottomNav';
 
 interface MapScreenProps {
   onNavigate: (screen: NavigationAction) => void;
@@ -152,7 +154,13 @@ export default function MapScreen({ onNavigate, userType }: MapScreenProps) {
         </div>
       </div>
 
-      <GuestBottomNav activeScreen="map" onNavigate={onNavigate} />
+      {userType === 'member' ? (
+        <MemberBottomNav activeScreen="home" onNavigate={onNavigate} />
+      ) : userType === 'basic' ? (
+        <BasicUserBottomNav activeScreen="map" onNavigate={onNavigate} />
+      ) : (
+        <GuestBottomNav activeScreen="map" onNavigate={onNavigate} />
+      )}
 
       {/* Filter Overlay/Drawer */}
       {showFilters && (

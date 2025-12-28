@@ -1,12 +1,15 @@
 import React from 'react';
-import { Screen, NavigationAction } from '../App';
+import { Screen, UserType, NavigationAction } from '../App';
 import { Home, MapPin, User, ChevronRight, Shield, Edit } from 'lucide-react';
+import BasicUserBottomNav from './BasicUserBottomNav';
+import MemberBottomNav from './MemberBottomNav';
 
 interface UserProfileProps {
-  onNavigate: (screen: NavigationAction) => void;
+  onNavigate: (screen: NavigationAction, userType?: UserType) => void;
+  userType?: UserType;
 }
 
-export default function UserProfile({ onNavigate }: UserProfileProps) {
+export default function UserProfile({ onNavigate, userType }: UserProfileProps) {
   return (
     <div className="min-h-screen bg-[#F5F5F5] flex flex-col">
       {/* Status Bar */}
@@ -77,27 +80,11 @@ export default function UserProfile({ onNavigate }: UserProfileProps) {
         </div>
       </div>
 
-      {/* Navigation Bar */}
-      <div className="bg-white border-t border-gray-200 px-8 py-4 flex justify-around items-center">
-        <button
-          onClick={() => onNavigate('basic-user-home')}
-          className="flex flex-col items-center gap-1 text-gray-400"
-        >
-          <Home className="w-6 h-6" />
-          <span className="text-xs">Home</span>
-        </button>
-        <button
-          onClick={() => onNavigate('map')}
-          className="flex flex-col items-center gap-1 text-gray-400"
-        >
-          <MapPin className="w-6 h-6" />
-          <span className="text-xs">Mapa</span>
-        </button>
-        <button className="flex flex-col items-center gap-1 text-[#7AC142]">
-          <User className="w-6 h-6" />
-          <span className="text-xs">Perfil</span>
-        </button>
-      </div>
+      {userType === 'member' ? (
+        <MemberBottomNav activeScreen="profile" onNavigate={onNavigate} />
+      ) : (
+        <BasicUserBottomNav activeScreen="profile" onNavigate={onNavigate} />
+      )}
     </div>
   );
 }

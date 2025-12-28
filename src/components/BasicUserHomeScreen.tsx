@@ -1,9 +1,10 @@
 import React from 'react';
-import { Screen } from '../App';
+import { Screen, NavigationAction, UserType } from '../App';
 import { Home, MapPin, User, Search, Apple } from 'lucide-react';
+import BasicUserBottomNav from './BasicUserBottomNav';
 
 interface BasicUserHomeScreenProps {
-  onNavigate: (screen: Screen) => void;
+  onNavigate: (screen: NavigationAction, userType?: UserType) => void;
 }
 
 export default function BasicUserHomeScreen({ onNavigate }: BasicUserHomeScreenProps) {
@@ -32,7 +33,7 @@ export default function BasicUserHomeScreen({ onNavigate }: BasicUserHomeScreenP
           {/* Top Half - Find Clubs Button */}
           <div className="p-6 border-b border-gray-100">
             <button
-              onClick={() => onNavigate('map')}
+              onClick={() => onNavigate('map', 'basic')}
               className="w-full bg-[#7AC142] text-white py-4 rounded-full flex items-center justify-center gap-2 shadow-md hover:bg-[#6BB032] transition-colors"
             >
               <Search className="w-5 h-5" />
@@ -49,20 +50,20 @@ export default function BasicUserHomeScreen({ onNavigate }: BasicUserHomeScreenP
             <div className="w-48 h-48 bg-white border-4 border-gray-200 rounded-2xl flex items-center justify-center">
               <svg width="180" height="180" viewBox="0 0 180 180">
                 <rect x="0" y="0" width="180" height="180" fill="white" />
-                
+
                 {/* QR Code Pattern */}
                 {/* Top-left corner */}
                 <rect x="10" y="10" width="50" height="50" fill="none" stroke="#333" strokeWidth="6" />
                 <rect x="22" y="22" width="26" height="26" fill="#333" />
-                
+
                 {/* Top-right corner */}
                 <rect x="120" y="10" width="50" height="50" fill="none" stroke="#333" strokeWidth="6" />
                 <rect x="132" y="22" width="26" height="26" fill="#333" />
-                
+
                 {/* Bottom-left corner */}
                 <rect x="10" y="120" width="50" height="50" fill="none" stroke="#333" strokeWidth="6" />
                 <rect x="22" y="132" width="26" height="26" fill="#333" />
-                
+
                 {/* Data dots */}
                 <rect x="70" y="15" width="8" height="8" fill="#333" />
                 <rect x="82" y="15" width="8" height="8" fill="#333" />
@@ -105,27 +106,7 @@ export default function BasicUserHomeScreen({ onNavigate }: BasicUserHomeScreenP
         </div>
       </div>
 
-      {/* Navigation Bar */}
-      <div className="bg-white border-t border-gray-200 px-8 py-4 flex justify-around items-center">
-        <button className="flex flex-col items-center gap-1 text-[#7AC142]">
-          <Home className="w-6 h-6" />
-          <span className="text-xs">Home</span>
-        </button>
-        <button
-          onClick={() => onNavigate('map')}
-          className="flex flex-col items-center gap-1 text-gray-400"
-        >
-          <MapPin className="w-6 h-6" />
-          <span className="text-xs">Mapa</span>
-        </button>
-        <button
-          onClick={() => onNavigate('profile')}
-          className="flex flex-col items-center gap-1 text-gray-400"
-        >
-          <User className="w-6 h-6" />
-          <span className="text-xs">Perfil</span>
-        </button>
-      </div>
+      <BasicUserBottomNav activeScreen="home" onNavigate={onNavigate} />
     </div>
   );
 }

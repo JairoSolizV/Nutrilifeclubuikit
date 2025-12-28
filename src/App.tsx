@@ -109,7 +109,7 @@ function App() {
       case 'nutrition':
         return <NutritionArticle onNavigate={navigateTo} />;
       case 'profile':
-        return <UserProfile onNavigate={navigateTo} />;
+        return <UserProfile onNavigate={navigateTo} userType={userType} />;
       case 'member-home':
         return <MemberHome onNavigate={navigateTo} />;
       case 'member-attendance':
