@@ -11,6 +11,8 @@ import ClubDetailEvents from './components/ClubDetailEvents';
 import NutritionArticle from './components/NutritionArticle';
 import UserProfile from './components/UserProfile';
 import MemberHome from './components/MemberHome';
+import MemberOrder from './components/MemberOrder';
+import MemberOrdersList from './components/MemberOrdersList';
 import MemberAttendance from './components/MemberAttendance';
 import MemberAchievements from './components/MemberAchievements';
 import MemberGamification from './components/MemberGamification';
@@ -22,6 +24,7 @@ import HostRegistration from './components/HostRegistration';
 import HostRegistrationStatus from './components/HostRegistrationStatus';
 import HostRegisterMember from './components/HostRegisterMember';
 import HostDashboardStats from './components/HostDashboardStats';
+import HostOrdersList from './components/HostOrdersList';
 import SupportCenter from './components/SupportCenter';
 import GuestFlavorCatalog from './components/GuestFlavorCatalog';
 import UserEditProfile from './components/UserEditProfile';
@@ -40,6 +43,8 @@ export type Screen =
   | 'nutrition'
   | 'profile'
   | 'member-home'
+  | 'member-order'
+  | 'member-orders-list'
   | 'member-attendance'
   | 'member-achievements'
   | 'member-gamification'
@@ -51,6 +56,7 @@ export type Screen =
   | 'host-registration-status'
   | 'host-register-member'
   | 'host-stats'
+  | 'host-orders'
   | 'support-center'
   | 'guest-catalog'
   | 'user-edit-profile'
@@ -112,6 +118,10 @@ function App() {
         return <UserProfile onNavigate={navigateTo} userType={userType} />;
       case 'member-home':
         return <MemberHome onNavigate={navigateTo} />;
+      case 'member-order':
+        return <MemberOrder onNavigate={navigateTo} />;
+      case 'member-orders-list':
+        return <MemberOrdersList onNavigate={navigateTo} />;
       case 'member-attendance':
         return <MemberAttendance onNavigate={navigateTo} />;
       case 'member-achievements':
@@ -122,6 +132,8 @@ function App() {
         return <HostDashboard onNavigate={navigateTo} />;
       case 'host-members':
         return <HostMemberList onNavigate={navigateTo} />;
+      case 'host-orders':
+        return <HostOrdersList onNavigate={navigateTo} />;
       case 'host-scan':
         return <HostScanQR onNavigate={navigateTo} />;
       case 'host-settings':

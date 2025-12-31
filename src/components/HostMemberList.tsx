@@ -107,53 +107,89 @@ export default function HostMemberList({ onNavigate }: HostMemberListProps) {
         </div>
 
         {/* Filter Chips */}
-        <div className="flex gap-2 overflow-x-auto pb-2">
+        <div className="flex gap-2 overflow-x-auto pb-2 mb-2">
           <button
             onClick={() => setSelectedFilter('all')}
-            className={`px-4 py-2 rounded-full text-sm whitespace-nowrap ${
-              selectedFilter === 'all'
-                ? 'bg-[#7AC142] text-white'
-                : 'bg-white border border-gray-300 text-gray-700'
-            }`}
+            className={`px-4 py-2 rounded-full text-sm whitespace-nowrap ${selectedFilter === 'all'
+              ? 'bg-[#7AC142] text-white'
+              : 'bg-white border border-gray-300 text-gray-700'
+              }`}
           >
-            Todos (145)
+            Todos
+          </button>
+          <button
+            onClick={() => setSelectedFilter('candidates')}
+            className={`px-4 py-2 rounded-full text-sm whitespace-nowrap flex items-center gap-1 ${selectedFilter === 'candidates'
+              ? 'bg-[#7AC142] text-white'
+              : 'bg-white border border-gray-300 text-gray-700'
+              }`}
+          >
+            <Star className="w-3 h-3" /> Candidatos
           </button>
           <button
             onClick={() => setSelectedFilter('vip')}
-            className={`px-4 py-2 rounded-full text-sm whitespace-nowrap ${
-              selectedFilter === 'vip'
-                ? 'bg-[#7AC142] text-white'
-                : 'bg-white border border-gray-300 text-gray-700'
-            }`}
+            className={`px-4 py-2 rounded-full text-sm whitespace-nowrap ${selectedFilter === 'vip'
+              ? 'bg-[#7AC142] text-white'
+              : 'bg-white border border-gray-300 text-gray-700'
+              }`}
           >
-            VIP (23)
-          </button>
-          <button
-            onClick={() => setSelectedFilter('active')}
-            className={`px-4 py-2 rounded-full text-sm whitespace-nowrap ${
-              selectedFilter === 'active'
-                ? 'bg-[#7AC142] text-white'
-                : 'bg-white border border-gray-300 text-gray-700'
-            }`}
-          >
-            Activos (98)
-          </button>
-          <button
-            onClick={() => setSelectedFilter('new')}
-            className={`px-4 py-2 rounded-full text-sm whitespace-nowrap ${
-              selectedFilter === 'new'
-                ? 'bg-[#7AC142] text-white'
-                : 'bg-white border border-gray-300 text-gray-700'
-            }`}
-          >
-            Nuevos (24)
+            VIP
           </button>
         </div>
+
+        {selectedFilter === 'candidates' && (
+          <div className="mb-4 bg-orange-50 p-4 rounded-xl flex gap-3">
+            <Star className="w-5 h-5 text-orange-500 flex-shrink-0" />
+            <p className="text-orange-800 text-xs">
+              Estos clientes visitan frecuentemente tu club. ¡Es una gran oportunidad para registrarlos como Socios!
+            </p>
+          </div>
+        )}
+
       </div>
 
       {/* Content */}
-      <div className="flex-1 overflow-y-auto px-6 py-6">
+      <div className="flex-1 overflow-y-auto px-6 py-6 pb-24">
         <div className="space-y-3">
+          {/* Hardcoded Candidate for Demo */}
+          {selectedFilter === 'candidates' && (
+            <div className="bg-white rounded-2xl shadow-md p-4 border-2 border-orange-100 relative overflow-hidden">
+              <div className="absolute top-0 right-0 bg-orange-100 text-orange-600 text-[10px] font-bold px-2 py-1 rounded-bl-lg">
+                POTENCIAL
+              </div>
+              <div className="flex items-center gap-3 mb-3">
+                <div className="w-12 h-12 bg-gray-200 rounded-full flex items-center justify-center text-gray-500">
+                  JP
+                </div>
+                <div>
+                  <h4 className="text-[#333333]">Juan Perez</h4>
+                  <p className="text-xs text-gray-500">Cliente Recurrente</p>
+                </div>
+              </div>
+              <div className="flex justify-between items-center bg-gray-50 rounded-lg p-3 mb-3">
+                <div className="text-center">
+                  <span className="text-lg font-bold text-[#333333]">8</span>
+                  <p className="text-[10px] text-gray-500">Visitas</p>
+                </div>
+                <div className="text-center">
+                  <span className="text-lg font-bold text-[#333333]">3</span>
+                  <p className="text-[10px] text-gray-500">Esta semana</p>
+                </div>
+                <div className="text-center">
+                  <span className="text-lg font-bold text-[#7AC142]">Alta</span>
+                  <p className="text-[10px] text-gray-500">Frecuencia</p>
+                </div>
+              </div>
+              <button
+                onClick={() => onNavigate('host-register-member')}
+                className="w-full bg-[#7AC142] text-white py-3 rounded-xl font-medium shadow-lg hover:bg-[#6BB032] transition-colors flex items-center justify-center gap-2"
+              >
+                <Star className="w-4 h-4" />
+                Promover a Socio
+              </button>
+            </div>
+          )}
+
           {members.map((member) => (
             <div key={member.id} className="bg-white rounded-2xl shadow-md p-4">
               <div className="flex items-start justify-between mb-3">

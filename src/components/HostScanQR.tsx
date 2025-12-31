@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Screen, NavigationAction } from '../App';
-import { ArrowLeft, QrCode, CheckCircle, Camera, Flashlight } from 'lucide-react';
+import { ArrowLeft, QrCode, CheckCircle, Camera, Flashlight, Coffee, ShoppingBag } from 'lucide-react';
 
 interface HostScanQRProps {
   onNavigate: (screen: NavigationAction) => void;
@@ -9,14 +9,25 @@ interface HostScanQRProps {
 export default function HostScanQR({ onNavigate }: HostScanQRProps) {
   const [scanned, setScanned] = useState(false);
   const [flashOn, setFlashOn] = useState(false);
+  const [scanType, setScanType] = useState<'attendance' | 'consumption' | null>(null);
 
   const handleScan = () => {
     // Simulate scanning
     setScanned(true);
+  };
+
+  const handleAction = (type: 'attendance' | 'consumption') => {
+    setScanType(type);
     setTimeout(() => {
       setScanned(false);
+      setScanType(null);
     }, 3000);
-  };
+  }
+
+  const resetScan = () => {
+    setScanned(false);
+    setScanType(null);
+  }
 
   return (
     <div className="min-h-screen bg-black flex flex-col">
@@ -49,7 +60,7 @@ export default function HostScanQR({ onNavigate }: HostScanQRProps) {
         {!scanned ? (
           <>
             {/* Camera Frame */}
-            <div className="relative w-full max-w-sm aspect-square mb-8">
+            <div className="relative w-full max-w-sm aspect-square mb-8 animate-in zoom-in duration-500">
               {/* Camera View Simulation */}
               <div className="absolute inset-0 bg-gradient-to-br from-gray-800 to-gray-900 rounded-3xl overflow-hidden">
                 <div className="absolute inset-0 flex items-center justify-center">
@@ -73,7 +84,7 @@ export default function HostScanQR({ onNavigate }: HostScanQRProps) {
             </div>
 
             <p className="text-white text-center mb-8">
-              Coloca el código QR del socio dentro del marco
+              Enfoca el código QR del socio
             </p>
 
             {/* Manual Entry Button */}
@@ -81,42 +92,71 @@ export default function HostScanQR({ onNavigate }: HostScanQRProps) {
               onClick={handleScan}
               className="text-[#7AC142] underline"
             >
-              Ingresar número de socio manualmente
+              Ingresar código manualmente
             </button>
           </>
+        ) : !scanType ? (
+          /* Action Selection State */
+          <div className="w-full max-w-sm animate-in fade-in slide-in-from-bottom-10 duration-500">
+            <div className="bg-white rounded-3xl p-6 text-center mb-6">
+              <div className="w-20 h-20 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                <span className="text-2xl font-bold text-[#333333]">MG</span>
+              </div>
+              <h3 className="text-xl font-bold text-[#333333]">María González</h3>
+              <p className="text-gray-500 text-sm">Socio VIP • SC-2024-0156</p>
+            </div>
+
+            <div className="grid grid-cols-2 gap-4">
+              <button
+                onClick={() => handleAction('attendance')}
+                className="bg-white/10 backdrop-blur-md border border-white/20 p-6 rounded-3xl hover:bg-white/20 transition-colors text-center"
+              >
+                <div className="w-12 h-12 bg-blue-500 rounded-full flex items-center justify-center mx-auto mb-3">
+                  <QrCode className="w-6 h-6 text-white" />
+                </div>
+                <p className="text-white font-medium">Solo Asistencia</p>
+                <p className="text-white/60 text-xs mt-1">+10 pts</p>
+              </button>
+
+              <button
+                onClick={() => handleAction('consumption')}
+                className="bg-[#7AC142] p-6 rounded-3xl shadow-lg hover:bg-[#6BB032] transition-colors text-center"
+              >
+                <div className="w-12 h-12 bg-white/20 rounded-full flex items-center justify-center mx-auto mb-3">
+                  <Coffee className="w-6 h-6 text-white" />
+                </div>
+                <p className="text-white font-bold">Registrar Consumo</p>
+                <p className="text-white/80 text-xs mt-1">+50 pts</p>
+              </button>
+            </div>
+
+            <button onClick={resetScan} className="w-full text-white/60 text-sm mt-8">
+              Cancelar
+            </button>
+          </div>
         ) : (
           /* Success State */
-          <div className="text-center">
-            <div className="w-24 h-24 bg-[#7AC142] rounded-full flex items-center justify-center mx-auto mb-6 animate-bounce">
+          <div className="text-center animate-in zoom-in duration-300">
+            <div className="w-24 h-24 bg-[#7AC142] rounded-full flex items-center justify-center mx-auto mb-6">
               <CheckCircle className="w-16 h-16 text-white" />
             </div>
-            <h3 className="text-white mb-2">¡Asistencia Registrada!</h3>
-            <p className="text-white/80 text-sm mb-6">María González</p>
+            <h3 className="text-white mb-2 text-2xl font-bold">
+              {scanType === 'consumption' ? '¡Consumo Registrado!' : '¡Asistencia OK!'}
+            </h3>
+            <p className="text-white/80 text-sm mb-6">Se han actualizado los puntos del socio.</p>
 
-            <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-5 mb-6 max-w-sm mx-auto">
-              <div className="grid grid-cols-2 gap-4 text-white">
-                <div>
-                  <p className="text-white/60 text-sm mb-1">Número de Socio</p>
-                  <p>SC-2024-0156</p>
-                </div>
-                <div>
-                  <p className="text-white/60 text-sm mb-1">Nivel</p>
-                  <p className="text-yellow-400">VIP</p>
-                </div>
-                <div>
-                  <p className="text-white/60 text-sm mb-1">Visita #</p>
-                  <p className="text-[#7AC142]">25</p>
-                </div>
-                <div>
-                  <p className="text-white/60 text-sm mb-1">Puntos ganados</p>
-                  <p className="text-[#7AC142]">+10 pts</p>
-                </div>
+            <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-5 mb-8 max-w-sm mx-auto">
+              <div className="flex justify-between items-center text-white">
+                <span className="text-white/60">Puntos ganados:</span>
+                <span className="text-2xl font-bold text-[#7AC142]">
+                  {scanType === 'consumption' ? '+50' : '+10'}
+                </span>
               </div>
             </div>
 
             <button
-              onClick={() => setScanned(false)}
-              className="bg-white text-[#333333] px-8 py-3 rounded-full"
+              onClick={resetScan}
+              className="bg-white text-[#333333] px-8 py-3 rounded-full font-medium shadow-xl"
             >
               Escanear otro código
             </button>
@@ -124,25 +164,22 @@ export default function HostScanQR({ onNavigate }: HostScanQRProps) {
         )}
       </div>
 
-      {/* Quick Stats Bar */}
-      <div className="bg-white/10 backdrop-blur-sm px-6 py-4">
-        <div className="flex justify-around text-center text-white">
-          <div>
-            <p className="text-2xl mb-1">42</p>
-            <p className="text-xs text-white/60">Hoy</p>
-          </div>
-          <div className="w-px bg-white/20"></div>
-          <div>
-            <p className="text-2xl mb-1">287</p>
-            <p className="text-xs text-white/60">Esta semana</p>
-          </div>
-          <div className="w-px bg-white/20"></div>
-          <div>
-            <p className="text-2xl mb-1">1,245</p>
-            <p className="text-xs text-white/60">Este mes</p>
+      {/* Quick Stats Bar only visible when not scanning result */}
+      {!scanned && (
+        <div className="bg-white/10 backdrop-blur-sm px-6 py-4">
+          <div className="flex justify-around text-center text-white">
+            <div>
+              <p className="text-2xl mb-1">42</p>
+              <p className="text-xs text-white/60">Asistencias</p>
+            </div>
+            <div className="w-px bg-white/20"></div>
+            <div>
+              <p className="text-2xl mb-1">15</p>
+              <p className="text-xs text-white/60">Consumos</p>
+            </div>
           </div>
         </div>
-      </div>
+      )}
     </div>
   );
 }

@@ -1,5 +1,5 @@
 import { Screen, NavigationAction, UserType } from '../App';
-import { Home, Calendar, Trophy, User, Star, Award, TrendingUp, Gift, QrCode } from 'lucide-react';
+import { Home, Calendar, Trophy, User, Star, Award, TrendingUp, Gift, QrCode, Zap, ShoppingBag, ArrowRight, Tag, Coffee, Info } from 'lucide-react';
 import MemberBottomNav from './MemberBottomNav';
 
 interface MemberHomeProps {
@@ -63,129 +63,112 @@ export default function MemberHome({ onNavigate }: MemberHomeProps) {
       </div>
 
       {/* Content */}
-      <div className="flex-1 overflow-y-auto px-6 py-6">
-        {/* Primary Action - Scan Club QR */}
-        <div className="bg-gradient-to-br from-[#7AC142] to-[#6BB032] rounded-3xl shadow-xl overflow-hidden mb-6">
-          <div className="p-8 text-center">
-            <div className="w-24 h-24 bg-white/20 rounded-full flex items-center justify-center mx-auto mb-4 backdrop-blur-sm">
-              <QrCode className="w-14 h-14 text-white" />
+      <div className="flex-1 overflow-y-auto px-6 py-4 pb-24">
+
+        {/* Loyalty Card Section */}
+        <div className="bg-white rounded-3xl p-6 shadow-md mb-6 relative overflow-hidden">
+          <div className="absolute top-0 right-0 w-32 h-32 bg-[#7AC142]/10 rounded-bl-full -mr-8 -mt-8"></div>
+
+          <div className="flex justify-between items-start mb-4 relative z-10">
+            <div>
+              <h3 className="text-lg font-bold text-[#333333]">Tarjeta de Fidelidad</h3>
+              <p className="text-sm text-gray-500">Club Vida Activa</p>
             </div>
-            <h3 className="text-white mb-2">Registrar Asistencia</h3>
-            <p className="text-white/90 text-sm mb-6">
-              Escanea el código QR del club para marcar tu visita
-            </p>
-            <button
-              onClick={() => onNavigate('host-scan')}
-              className="w-full bg-white text-[#7AC142] py-4 rounded-full shadow-lg hover:bg-gray-50 transition-colors"
-            >
-              Escanear QR del Club
-            </button>
-            <button
-              className="w-full mt-3 text-white/80 text-sm underline"
-            >
-              Ver mi credencial/QR
-            </button>
+            <div className="bg-[#7AC142]/10 px-3 py-1 rounded-full">
+              <span className="text-xs font-bold text-[#7AC142]">8/10 Sellos</span>
+            </div>
           </div>
+
+          {/* Stamps Grid */}
+          <div className="flex justify-center mb-2 relative z-10">
+            <div className="grid grid-cols-5 gap-2 max-w-[280px]">
+              {[...Array(8)].map((_, i) => (
+                <div key={`filled-${i}`} className="w-10 h-10 bg-[#7AC142] rounded-full flex items-center justify-center shadow-sm">
+                  <Star className="w-5 h-5 text-white fill-white" />
+                </div>
+              ))}
+              <div className="w-10 h-10 bg-gray-100 rounded-full flex items-center justify-center border-2 border-dashed border-gray-300">
+                <span className="text-xs text-gray-400">9</span>
+              </div>
+              <div className="w-10 h-10 bg-yellow-100 rounded-full flex items-center justify-center border-2 border-yellow-200 animate-pulse">
+                <Gift className="w-5 h-5 text-yellow-500" />
+              </div>
+            </div>
+          </div>
+
+          <p className="text-xs text-center text-gray-500 relative z-10">
+            ¡Solo 2 consumos más para tu recompensa sorpresa!
+          </p>
         </div>
 
-        {/* Quick Stats Grid */}
-        <div className="grid grid-cols-2 gap-4 mb-6">
+        {/* Order Action */}
+        <div className="mb-8">
           <button
-            onClick={() => onNavigate('member-attendance', 'member')}
-            className="bg-white rounded-2xl p-4 shadow-md hover:shadow-lg transition-shadow"
+            onClick={() => onNavigate('member-order', 'member')}
+            className="w-full bg-[#333333] text-white p-1 rounded-full shadow-xl flex items-center pr-6 group hover:bg-black transition-all"
           >
-            <div className="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mb-3">
-              <Calendar className="w-6 h-6 text-blue-600" />
+            <div className="w-14 h-14 bg-[#7AC142] rounded-full flex items-center justify-center mr-4 group-hover:scale-105 transition-transform">
+              <ShoppingBag className="w-7 h-7 text-white" />
             </div>
-            <p className="text-2xl text-[#333333] mb-1">24</p>
-            <p className="text-sm text-gray-500">Visitas este mes</p>
+            <div className="flex-1 text-left">
+              <h3 className="font-bold text-lg">Hacer Pedido</h3>
+              <p className="text-gray-400 text-xs">Pide por adelantado y recoge</p>
+            </div>
+            <ArrowRight className="w-5 h-5 text-gray-400 group-hover:text-white transition-colors" />
           </button>
-
-          <button
-            onClick={() => onNavigate('member-achievements', 'member')}
-            className="bg-white rounded-2xl p-4 shadow-md hover:shadow-lg transition-shadow"
-          >
-            <div className="w-12 h-12 bg-yellow-100 rounded-full flex items-center justify-center mb-3">
-              <Trophy className="w-6 h-6 text-yellow-600" />
-            </div>
-            <p className="text-2xl text-[#333333] mb-1">12</p>
-            <p className="text-sm text-gray-500">Logros obtenidos</p>
-          </button>
-
-          <button
-            onClick={() => onNavigate('member-gamification', 'member')}
-            className="bg-white rounded-2xl p-4 shadow-md hover:shadow-lg transition-shadow"
-          >
-            <div className="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center mb-3">
-              <TrendingUp className="w-6 h-6 text-green-600" />
-            </div>
-            <p className="text-2xl text-[#333333] mb-1">7</p>
-            <p className="text-sm text-gray-500">Racha de días</p>
-          </button>
-
-          <div className="bg-white rounded-2xl p-4 shadow-md">
-            <div className="w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center mb-3">
-              <Gift className="w-6 h-6 text-purple-600" />
-            </div>
-            <p className="text-2xl text-[#333333] mb-1">3</p>
-            <p className="text-sm text-gray-500">Beneficios activos</p>
-          </div>
         </div>
 
-        {/* My Club Info */}
-        <div className="bg-white rounded-2xl shadow-md p-5 mb-6">
-          <h4 className="text-[#333333] mb-3">Mi Club</h4>
-          <div className="flex items-center gap-3">
-            <div className="w-14 h-14 bg-gradient-to-br from-[#7AC142] to-[#6BB032] rounded-xl flex items-center justify-center">
-              <Home className="w-7 h-7 text-white" />
-            </div>
-            <div className="flex-1">
-              <p className="text-[#333333]">Club Vida Activa</p>
-              <p className="text-sm text-gray-500 mt-0.5">Miembro desde Feb 2024</p>
-            </div>
-            <Award className="w-6 h-6 text-yellow-400" />
-          </div>
-        </div>
+        {/* News & Benefits Feed */}
+        <h3 className="text-[#333333] font-bold mb-4 flex items-center gap-2">
+          <Zap className="w-5 h-5 text-[#7AC142]" />
+          Novedades y Beneficios
+        </h3>
 
-        {/* Recent Activity */}
-        <div className="bg-white rounded-2xl shadow-md p-5">
-          <h4 className="text-[#333333] mb-4">Actividad Reciente</h4>
-          <div className="space-y-3">
-            <div className="flex items-center gap-3 pb-3 border-b border-gray-100">
-              <div className="w-10 h-10 bg-green-100 rounded-full flex items-center justify-center">
-                <Calendar className="w-5 h-5 text-green-600" />
-              </div>
-              <div className="flex-1">
-                <p className="text-sm text-[#333333]">Asistencia registrada</p>
-                <p className="text-xs text-gray-500">Hoy a las 09:30</p>
-              </div>
-              <span className="text-xs text-[#7AC142]">+10 pts</span>
+        <div className="space-y-4">
+          {/* News Item 1 */}
+          <div className="bg-white p-4 rounded-2xl shadow-sm flex gap-4">
+            <div className="w-20 h-20 bg-orange-100 rounded-xl flex-shrink-0 flex items-center justify-center">
+              <Coffee className="w-8 h-8 text-orange-500" />
             </div>
-            <div className="flex items-center gap-3 pb-3 border-b border-gray-100">
-              <div className="w-10 h-10 bg-yellow-100 rounded-full flex items-center justify-center">
-                <Trophy className="w-5 h-5 text-yellow-600" />
-              </div>
-              <div className="flex-1">
-                <p className="text-sm text-[#333333]">Nuevo logro desbloqueado</p>
-                <p className="text-xs text-gray-500">Ayer</p>
-              </div>
-              <span className="text-xs text-[#7AC142]">+50 pts</span>
+            <div>
+              <span className="text-[10px] font-bold text-orange-500 bg-orange-50 px-2 py-0.5 rounded-full">NUEVO</span>
+              <h4 className="font-bold text-[#333333] text-sm mt-1">¡Llegó el Té de Durazno!</h4>
+              <p className="text-xs text-gray-500 mt-1 line-clamp-2">
+                Ven a probar nuestro nuevo sabor energizante. Disponible desde hoy en la barra.
+              </p>
             </div>
-            <div className="flex items-center gap-3">
-              <div className="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center">
-                <Star className="w-5 h-5 text-blue-600" />
-              </div>
-              <div className="flex-1">
-                <p className="text-sm text-[#333333]">Racha de 7 días</p>
-                <p className="text-xs text-gray-500">Hace 2 días</p>
-              </div>
-              <span className="text-xs text-[#7AC142]">+25 pts</span>
+          </div>
+
+          {/* News Item 2 (Benefit) */}
+          <div className="bg-white p-4 rounded-2xl shadow-sm flex gap-4 border border-[#7AC142]/20">
+            <div className="w-20 h-20 bg-green-100 rounded-xl flex-shrink-0 flex items-center justify-center">
+              <Tag className="w-8 h-8 text-[#7AC142]" />
+            </div>
+            <div>
+              <span className="text-[10px] font-bold text-[#7AC142] bg-green-50 px-2 py-0.5 rounded-full">BENEFICIO SOCIO</span>
+              <h4 className="font-bold text-[#333333] text-sm mt-1">10% OFF en Barras</h4>
+              <p className="text-xs text-gray-500 mt-1">
+                Por ser Socio Nivel Diamante, tienes descuento en todas las barras de proteína.
+              </p>
+            </div>
+          </div>
+
+          {/* News Item 3 */}
+          <div className="bg-white p-4 rounded-2xl shadow-sm flex gap-4">
+            <div className="w-20 h-20 bg-blue-100 rounded-xl flex-shrink-0 flex items-center justify-center">
+              <Info className="w-8 h-8 text-blue-500" />
+            </div>
+            <div>
+              <span className="text-[10px] font-bold text-blue-500 bg-blue-50 px-2 py-0.5 rounded-full">NUTRICIÓN</span>
+              <h4 className="font-bold text-[#333333] text-sm mt-1">Tip: Hidratación</h4>
+              <p className="text-xs text-gray-500 mt-1 line-clamp-2">
+                Recuerda beber al menos 2 litros de agua al día para maximizar tu rendimiento.
+              </p>
             </div>
           </div>
         </div>
       </div>
 
-      {/* Navigation Bar */}
       <MemberBottomNav activeScreen="home" onNavigate={onNavigate} />
     </div>
   );

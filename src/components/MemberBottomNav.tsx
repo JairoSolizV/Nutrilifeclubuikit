@@ -1,8 +1,8 @@
 import { Screen, NavigationAction, UserType } from '../App';
-import { Home, Calendar, Trophy, User } from 'lucide-react';
+import { Home, Calendar, Trophy, User, ShoppingBag } from 'lucide-react';
 
 interface MemberBottomNavProps {
-    activeScreen: 'home' | 'attendance' | 'achievements' | 'profile';
+    activeScreen: 'home' | 'attendance' | 'achievements' | 'profile' | 'orders';
     onNavigate: (screen: NavigationAction, userType?: UserType) => void;
 }
 
@@ -22,6 +22,13 @@ export default function MemberBottomNav({ activeScreen, onNavigate }: MemberBott
             >
                 <Calendar className="w-6 h-6" />
                 <span className="text-xs">Asistencias</span>
+            </button>
+            <button
+                onClick={() => onNavigate('member-orders-list', 'member')}
+                className={`flex flex-col items-center gap-1 ${activeScreen === 'orders' ? 'text-[#7AC142]' : 'text-gray-400'}`}
+            >
+                <ShoppingBag className="w-6 h-6" />
+                <span className="text-xs">Pedidos</span>
             </button>
             <button
                 onClick={() => onNavigate('member-achievements', 'member')}

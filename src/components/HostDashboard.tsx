@@ -1,6 +1,7 @@
 import React from 'react';
 import { Screen, NavigationAction } from '../App';
-import { Home, Users, QrCode, Settings, TrendingUp, UserPlus, Calendar, Award } from 'lucide-react';
+import { Home, Users, QrCode, Settings, TrendingUp, UserPlus, Calendar, Award, ShoppingBag } from 'lucide-react';
+import HostBottomNav from './HostBottomNav';
 
 interface HostDashboardProps {
   onNavigate: (screen: NavigationAction) => void;
@@ -91,6 +92,31 @@ export default function HostDashboard({ onNavigate }: HostDashboardProps) {
             </p>
             <p className="text-xs text-gray-500">Club ID: CLB-2024-001</p>
           </div>
+        </div>
+
+        {/* Orders Card (New) */}
+        <div className="bg-[#333333] rounded-2xl shadow-lg p-5 mb-6 text-white relative overflow-hidden" onClick={() => onNavigate('host-orders')}>
+          <div className="absolute right-0 top-0 w-32 h-32 bg-[#7AC142]/20 rounded-bl-full -mr-8 -mt-8"></div>
+          <div className="flex justify-between items-start relative z-10">
+            <div>
+              <h3 className="font-bold text-lg">Pedidos Recibidos</h3>
+              <p className="text-gray-300 text-sm mt-1">Gestionar órdenes de socios</p>
+            </div>
+            <div className="bg-red-500 rounded-full w-8 h-8 flex items-center justify-center font-bold">
+              3
+            </div>
+          </div>
+          <div className="mt-4 flex gap-4 text-xs relative z-10 text-gray-300">
+            <div className="flex items-center gap-1">
+              <span className="w-2 h-2 rounded-full bg-orange-400"></span> 1 Preparando
+            </div>
+            <div className="flex items-center gap-1">
+              <span className="w-2 h-2 rounded-full bg-green-400"></span> 1 Listo
+            </div>
+          </div>
+          <button className="w-full mt-4 bg-white/10 text-white py-2 rounded-lg text-sm font-medium hover:bg-white/20 transition-colors">
+            Ver Pedidos
+          </button>
         </div>
 
         {/* Quick Actions */}
@@ -225,33 +251,7 @@ export default function HostDashboard({ onNavigate }: HostDashboardProps) {
       </div>
 
       {/* Navigation Bar */}
-      <div className="bg-white border-t border-gray-200 px-8 py-4 flex justify-around items-center">
-        <button className="flex flex-col items-center gap-1 text-[#7AC142]">
-          <Home className="w-6 h-6" />
-          <span className="text-xs">Inicio</span>
-        </button>
-        <button
-          onClick={() => onNavigate('host-scan')}
-          className="flex flex-col items-center gap-1 text-gray-400"
-        >
-          <QrCode className="w-6 h-6" />
-          <span className="text-xs">Escanear</span>
-        </button>
-        <button
-          onClick={() => onNavigate('host-members')}
-          className="flex flex-col items-center gap-1 text-gray-400"
-        >
-          <Users className="w-6 h-6" />
-          <span className="text-xs">Socios</span>
-        </button>
-        <button
-          onClick={() => onNavigate('host-settings')}
-          className="flex flex-col items-center gap-1 text-gray-400"
-        >
-          <Settings className="w-6 h-6" />
-          <span className="text-xs">Config</span>
-        </button>
-      </div>
-    </div>
+      <HostBottomNav activeScreen="home" onNavigate={onNavigate} />
+    </div >
   );
 }
